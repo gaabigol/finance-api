@@ -7,7 +7,7 @@ services:
     volumes:
      - pgdata:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: sua-senha
+      POSTGRES_PASSWORD: root
     ports:
       - 5432:5432
 volumes:

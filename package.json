@@ -1,40 +1,58 @@
 {
-  "name": "api-express-typescript",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/app.ts",
-    "build": "tsc",
-    "start": "node dist/app.js",
-    "prepare": "husky"
-  },
-  "keywords": [],
-  "author": "Gabriel Bernardo",
-  "license": "ISC",
-  "lint-staged": {
-    "*.ts": [
-      "npx eslint",
-      "npx prettier --write"
-    ]
-  },
-  "dependencies": {
-    "express": "^4.21.2",
-    "nodemon": "^3.1.9"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.20.0",
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.13.0",
-    "eslint": "^9.20.1",
-    "eslint-config-prettier": "^10.0.1",
-    "git-commit-msg-linter": "^5.0.8",
-    "globals": "^15.15.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^15.4.3",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.24.1"
-  }
+    "name": "api-express-typescript",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon src/index.ts",
+        "build": "tsc",
+        "start": "node dist/index.js",
+        "kill-port": "node scripts/kill-port.js",
+        "clean-start": "npm run kill-port && npm run dev",
+        "prepare": "husky"
+    },
+    "keywords": [],
+    "author": "Gabriel Bernardo",
+    "license": "ISC",
+    "lint-staged": {
+        "*.ts": [
+            "npx eslint",
+            "npx prettier --write"
+        ]
+    },
+    "dependencies": {
+        "@prisma/client": "^6.4.1",
+        "@types/bcrypt": "^5.0.2",
+        "bcrypt": "^5.1.1",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "express-rate-limit": "^7.5.0",
+        "helmet": "^8.0.0",
+        "http-errors": "^2.0.0",
+        "nodemon": "^3.1.9",
+        "pg": "^8.13.3",
+        "uuid": "^11.1.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.20.0",
+        "@types/cors": "^2.8.17",
+        "@types/express": "^5.0.0",
+        "@types/helmet": "^4.0.0",
+        "@types/http-errors": "^2.0.4",
+        "@types/node": "^22.13.0",
+        "@types/pg": "^8.11.11",
+        "eslint": "^9.20.1",
+        "eslint-config-prettier": "^10.0.1",
+        "git-commit-msg-linter": "^5.0.8",
+        "globals": "^15.15.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^15.4.3",
+        "prisma": "^6.4.1",
+        "ts-node": "^10.9.2",
+        "ts-node-dev": "^2.0.0",
+        "tsx": "^4.19.3",
+        "typescript": "^5.7.3",
+        "typescript-eslint": "^8.24.1"
+    }
 }

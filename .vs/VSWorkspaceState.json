@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\Domain",
+    "\\src\\Domain\\Entity",
+    "\\src\\Domain\\Entity\\User"
+  ],
+  "SelectedNode": "\\src\\Domain\\Entity\\User\\User.ts",
+  "PreviewInSolutionExplorer": false
+}

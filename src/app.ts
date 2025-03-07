@@ -1,18 +1,43 @@
-import express, { Express, Request, Response } from 'express'
+import express, { Express } from 'express'
+import createHttpError from 'http-errors'
 
-const app: Express = express()
-const port = process.env.PORT || 3000
+import { router } from './Infrastructure/Http/Router/Routes'
+import { MiddlewareConfig } from './Infrastructure/Http/Middleware/MidlewareConfig'
+import errorHandlerMiddleware from './Infrastructure/Http/Middleware/ErrorHandler'
 
-app.use(express.json())
+export class App {
+    private app: Express
+    private middlewareConfig: MiddlewareConfig
 
-app.get('/', (req: Request, res: Response) => {
-    res.json({ message: 'API funcionando!' })
-})
+    constructor() {
+        this.app = express()
+        this.middlewareConfig = new MiddlewareConfig()
 
-app.get('/hello', (req: Request, res: Response) => {
-    res.json({ message: 'Olá, mundo!' })
-})
+        this.configureMiddlewares()
+        this.configureRoutes()
+        this.configureErrorHandling()
+    }
 
-app.listen(port, () => {
-    console.log(`⚡️[servidor]: API está rodando em http://localhost:${port}`)
-})
+    private configureMiddlewares(): void {
+        this.app.use(express.json({ limit: '10mb' }))
+        this.app.use(express.urlencoded({ extended: true }))
+        this.middlewareConfig.applyCors(this.app)
+        this.middlewareConfig.applyHelmet(this.app)
+        this.middlewareConfig.applyRateLimiting(this.app)
+    }
+
+    private configureRoutes(): void {
+        this.app.use('/api/v1', router)
+    }
+
+    private configureErrorHandling(): void {
+        this.app.use((req, res, next) => {
+            next(createHttpError(404, 'Endpoint não encontrado'))
+        })
+        this.app.use(errorHandlerMiddleware)
+    }
+
+    public getExpressApp(): Express {
+        return this.app
+    }
+}

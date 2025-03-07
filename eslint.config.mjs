@@ -10,4 +10,9 @@ export default [
     pluginJs.configs.recommended,
     ...tseslint.configs.recommended,
     prettierConfig,
+    {
+        rules: {
+            '@typescript-eslint/no-explicit-any': 'off',
+        },
+    },
 ]
